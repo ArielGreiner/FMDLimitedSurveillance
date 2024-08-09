@@ -1,4 +1,4 @@
-If aiming to re-generate the figures from "Allocating Limited Surveillance Effort for Outbreak Detection of Endemic Foot and Mouth Disease" use the code and data* stored in 'FinalCode_AllocatingLimitedSurveillanceProject_2024', that folder is complete.
+Code and data that may be used to re-generate the figures from "Allocating Limited Surveillance Effort for Outbreak Detection of Endemic Foot and Mouth Disease". The Spatial Proximity Surveillance Method results are not reproducible as we (the authors) did not have permission to upload specific location data. Randomized location data is included instead, so the code for the method can be assessed.
 
 This data is an anonymized version of agricultural data acquired by Prof Mike Tildesley through agreement with the SAP Institute of the Republic of Türkiye and EuFMD, Mike is a co-author on the accompanying study and this data is being used and uploaded with permission.
 
