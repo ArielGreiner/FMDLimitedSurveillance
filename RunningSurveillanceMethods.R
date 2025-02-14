@@ -21,7 +21,7 @@ setwd('/Users/akg6325/Dropbox/Github') #replace with your own directory!
 
 ####LOAD IN USEFUL FUNCTIONS####
 
-#functions written by José 
+#functions written by José L. Herrera-Diestra
 
 ### Function that, given a network object (igraph), calculates node level statistics
 ### Works for networks of any size
@@ -233,7 +233,7 @@ pperc_outbreaks_full$Actual_peroutbreaks[pperc_outbreaks_full$twomonthpd == "all
 #save pperc_outbreaks_full, see below for how I saved them
 #saveRDS(pperc_outbreaks_full, file = "FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthnetworks_degreeonlyriskfactor_fullnetworkvalues_11.9.2023.rds") 
 
-#Fig S2b: how does it change over time? remove the "alltime" rows first
+#Fig S3b: how does it change over time? remove the "alltime" rows first
 pperc_outbreaks_only2months <- pperc_outbreaks_full[pperc_outbreaks_full$twomonthpd != "alltime",]
 
 plot <- ggplot(data =pperc_outbreaks_only2months[pperc_outbreaks_only2months$P_perc==0.1,], aes(x=as.numeric(twomonthpd), y=Actual_peroutbreaks, group = metric))+
@@ -246,7 +246,7 @@ plot <- ggplot(data =pperc_outbreaks_only2months[pperc_outbreaks_only2months$P_p
 #scale_color_viridis(discrete = TRUE)
 #scale_color_manual(values = c(sixtyfiveviridiscols, "red"))
 
-#Fig S2a (first row): if look at the top x% of nodes, how many t+1 outbreaks do we find? looking at the degree metric and across networks (e.g. months)
+#Fig S3a (first row): if look at the top x% of nodes, how many t+1 outbreaks do we find? looking at the degree metric and across networks (e.g. months)
 
 pperc_outbreaks_avg <- data.frame(P_perc = p_perc, avg_tplus1outbreaks = NA, avg_alloutbreaks = NA, lower_tplus1outbreaks = NA, lower_alloutbreaks = NA, higher_tplus1outbreaks = NA, higher_alloutbreaks = NA)
 
@@ -449,7 +449,7 @@ for(i in 1:num_2_ntwks){
 
 for(k in 1:length(p_perc)){ 
   
-  #Fig S1
+  #Fig S2
   #png(paste0("FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthplots/ThreeMethodComparison_11.2023/searchsize_Comparing3Methods_",p_perc[k]*100,"pct_all2monthnetworks_11.9.2023.png"))
   plot(x = seq(1,num_2_ntwks,1), y = (wctracing_outneighbs$pctntwk[wctracing_outneighbs$pctaway == p_perc[k]]*100), xlab = "Month", ylab = "% Network Searched", pch = 20, col = "#7fc97f", main = paste("Searching ~",p_perc[k]*100,"% of Network"), ylim = c(0,60))
   lines(x = seq(1,num_2_ntwks,1), y = (wctracing_outneighbs$pctntwk[wctracing_outneighbs$pctaway == p_perc[k]]*100), lty = 2, col = "#7fc97f")
@@ -485,7 +485,7 @@ for(k in 1:length(p_perc)){
   summary_threemethods_descending <- summary_threemethods %>%
     arrange(desc(tplus1outbreaks))
   
- #fig 4 and s5
+ #fig 4 and s7
   summary_threemethods_descending_fixed <- summary_threemethods_descending[-66,]
   plot <- ggplot(summary_threemethods_descending_fixed, aes(x = reorder(tplus1month, -tplus1outbreaks), y = (best_numoutbreaks_val/tplus1outbreaks)*100), group = as.factor(best_numoutbreaks_id)) +
     geom_bar(aes(), fill = "lightgrey", stat = "identity")+
@@ -504,7 +504,7 @@ for(k in 1:length(p_perc)){
   #ggsave(plot, filename = paste0("FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthplots/ThreeMethodComparison_11.2023/ThreeMethodSummary_highesttplus1outbreakpercentage_",p_perc[k]*100,"pct_greybars_3.14.2024.png"), bg = "transparent", height = 10, width = 10)
   
 
-  #Fig 3, S4:Plot the # of outbreaks found by each method for each month, ordered by decreasing outbreak #
+  #Fig 3, S6:Plot the # of outbreaks found by each method for each month, ordered by decreasing outbreak #
   plot <- ggplot(summary_threemethods_descending, aes(x = reorder(tplus1month, -tplus1outbreaks), y = tplus1_proximity)) +
     geom_bar(stat = "identity", fill = "#beaed4")+
     geom_line(aes(x = reorder(tplus1month, -tplus1outbreaks), y = tplus1outbreaks), linewidth = 1, color = "black", group = 1)+
@@ -598,7 +598,7 @@ for(k in 1:length(p_perc)){
   }
   
 
-  #Fig S6: plot the number of outbreaks found by none of the methods in each month
+  #Fig S8: plot the number of outbreaks found by none of the methods in each month
   png(paste0("FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthplots/ThreeMethodComparison_11.2023/MethodEpiunitOverlap/",p_perc[k]*100,"pct/tplus1outbreaksfoundbynomethod_",p_perc[k]*100,"pct_month",i,"_degonly_7.2.2024.png"))
   plot(x = threemethodoverlap_permonth$tplus1month[threemethodoverlap_permonth$method == "none"], y = threemethodoverlap_permonth$num_outbreaks_degonly[threemethodoverlap_permonth$method == "none"]/tplus1outbreaks[-66], type = "l",xlab = "Month", ylab = "% of t+1 Outbreaks found by no method", main = paste(p_perc[k]*100,"% Searched, Degree Only"), ylim = c(0,1))
   points(x = threemethodoverlap_permonth$tplus1month[threemethodoverlap_permonth$method == "none"], y = threemethodoverlap_permonth$num_outbreaks_degonly[threemethodoverlap_permonth$method == "none"]/tplus1outbreaks[-66], pch=20)
@@ -680,9 +680,10 @@ for(i in 1:length(p_perc)){
 
 #Fig 2: Plot avgresults_exp (error bars!)
 plot <- ggplot(avgresults_exp, aes(x = P_perc, y = Mean*100, ymin = TwentyFive*100, ymax = SeventyFive*100, fill = SearchMethod, col = SearchMethod)) +
-  geom_ribbon(alpha = 0.1, colour = NA)+
-  geom_line()+
-  geom_point()+
+  geom_ribbon(alpha = 0.3, colour = NA)+
+  geom_line(lwd = 1)+
+  geom_point(aes(shape=SearchMethod), size = 2.5)+
+  scale_shape_manual(values=c(15,17,18,16))+
   xlab("Surveillance Effort")+
   ylab("% Outbreaks Detected")+
   scale_y_continuous(limits = c(0, 100))+
@@ -692,7 +693,7 @@ plot <- ggplot(avgresults_exp, aes(x = P_perc, y = Mean*100, ymin = TwentyFive*1
   theme_bw()
 ggsave(plot, filename = paste0("FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthplots/ThreeMethodComparison_11.2023/AvgMethods_ErrorBars_7.7.2024.png"), bg = "transparent", height = 10, width = 10)
 
-#Fig S3: Plot avgresults_exp (error bars!) with all time network risk factor also
+#Fig S4: Plot avgresults_exp (error bars!) with all time network risk factor also
 avgresults_exp_alltime <- data.frame(P_perc = rep(p_perc*100, each = 1), SearchMethod = "RiskFactors_AllTime", Mean = NA, TwentyFive = NA, SeventyFive = NA)
 for(i in 1:length(p_perc)){ #just going to set 25% and 75% to the same value as 'Mean' so i can use the same format
   avgresults_exp_alltime$Mean[avgresults_exp_alltime$SearchMethod == "RiskFactors_AllTime" & avgresults_exp_alltime$P_perc == p_perc[i]*100] <- pperc_outbreaks_fullonly$Actual_peroutbreaks[pperc_outbreaks_fullonly$P_perc == p_perc[i]]
@@ -703,9 +704,10 @@ for(i in 1:length(p_perc)){ #just going to set 25% and 75% to the same value as 
 avgresults_exp_full <- rbind(avgresults_exp, avgresults_exp_alltime)
 
 plot <- ggplot(avgresults_exp_full, aes(x = P_perc, y = Mean*100, ymin = TwentyFive*100, ymax = SeventyFive*100, fill = SearchMethod, col = SearchMethod)) +
-  geom_ribbon(alpha = 0.1, colour = NA)+
-  geom_point()+
-  geom_line()+
+  geom_ribbon(alpha = 0.3, colour = NA)+ #0.1
+  geom_line(lwd = 1)+ #1.5
+  geom_point(aes(shape=SearchMethod), size = 2.5)+ #3
+  scale_shape_manual(values=c(15,17,18,20,16))+
   xlab("Surveillance Effort")+
   ylab("Average % Outbreaks Detected")+
   scale_y_continuous(limits = c(0, 100))+

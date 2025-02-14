@@ -22,7 +22,7 @@ setwd('/Users/akg6325/Dropbox/Github') #replace with your own directory!
 
 ####LOAD IN USEFUL FUNCTIONS####
 
-#functions written by José 
+#functions written by José L. Herrera Diestra
 
 ### Function that, given a network object (igraph), calculates node level statistics
 ### Works for networks of any size
