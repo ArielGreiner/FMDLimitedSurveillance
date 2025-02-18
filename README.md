@@ -2,7 +2,7 @@ Code and data that may be used to re-generate the figures from "Allocating Limit
 
 This data is an anonymized version of agricultural data acquired by Prof Mike Tildesley through agreement with the SAP Institute of the Republic of Türkiye and EuFMD, Mike is a co-author on the accompanying study and this data is being used and uploaded with permission.
 
-*one of the data files was too big to be stored in this repository and can be found at: 10.25446/oxford.26488138 
+*one of the data files was too big to be stored in this repository and can be found at: https://figshare.com/articles/dataset/networks_2monthsep_rds/28429379?file=52409981
 
 The specific location data was removed from this dataset as these data are sensitive. All data queries should be made by contacting the Sap Institute in Turkey (abdulnaci.bulut@tarimorman.gov.tr).
 
