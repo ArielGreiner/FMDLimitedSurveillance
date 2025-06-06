@@ -416,7 +416,7 @@ for(n in 1:numserotypes){
   outbreakepiunits <- tplus1stats_full_fxd <- t_outbreaks <- serotype <- wctracing_outneighbs <- wcontacttracing_tplus1epiunits <- NULL
 }
 
-####MAKING TABLE S2, S3####
+####MAKING TABLE S3, S4####
 #need outbreakepiunits_A/_O, t_outbreaks_a/_o (because only looking at the t outbreaks that act as sources in the network), tplus1_stats_a/_o (because only going to find outbreaks that have network destination data), outbreakepiunits
 
 numserotypes <- 2

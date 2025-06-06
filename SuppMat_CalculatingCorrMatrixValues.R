@@ -216,7 +216,7 @@ pperc_outbreaks_full$Actual_peroutbreaks[pperc_outbreaks_full$twomonthpd == "all
 #saveRDS(pperc_outbreaks_full, file = "FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthnetworks_riskfactor_fullnetworkvalues_9.28.2023.rds") #note from 10.19.2023 - the %in% statements here are fine, they just had to be reversed in the 10.13.2023 chunk because was using them to subset rows of another dataframe so it had to spit out things relevant to that dataset, the lengths (when i calculated them) were consistent regardless of the order of the %in% statements 
 
 
-#Fig S2c: how does it change over time? remove the "alltime" rows first
+#Fig S3c: how does it change over time? remove the "alltime" rows first
 pperc_outbreaks_only2months <- pperc_outbreaks_full[pperc_outbreaks_full$twomonthpd != "alltime",]
 
 plot <- ggplot(data =pperc_outbreaks_only2months[pperc_outbreaks_only2months$P_perc==0.1,], aes(x=as.numeric(twomonthpd), y=Actual_peroutbreaks, group = metric))+
@@ -227,7 +227,7 @@ plot <- ggplot(data =pperc_outbreaks_only2months[pperc_outbreaks_only2months$P_p
   ylim(c(0,1)) #added 7.2.2024
 #ggsave(plot, filename = paste0("FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthplots/2monthnetworks_overtime_allmetrics_7.2.2024.png"), bg = "transparent", height = 10, width = 10)
 
-#Fig S2a (2nd row): if look at the top x% of nodes, how many t+1 outbreaks do we find? avg-ing across metrics and across networks (e.g. months)
+#Fig S3a (2nd row): if look at the top x% of nodes, how many t+1 outbreaks do we find? avg-ing across metrics and across networks (e.g. months)
 #may as well use pperc_outbreaks_full so we can say something about the full network values of this also 
 
 pperc_outbreaks_avg <- data.frame(P_perc = p_perc, avg_tplus1outbreaks = NA, avg_alloutbreaks = NA, lower_tplus1outbreaks = NA, lower_alloutbreaks = NA, higher_tplus1outbreaks = NA, higher_alloutbreaks = NA)
@@ -252,7 +252,7 @@ for(i in 1:length(p_perc)){
 
 
 
-##Fig S2d
+##Fig S3d
 #load in the Other Metrics 2 Month Data
 #pperc_outbreaks_full_othermetrics <- readRDS(file = "FMDLimitedSurveillance/TemporalNetworks_7.2023/2monthnetworks_riskfactor_fullnetworkvalues_9.28.2023.rds") 
 pperc_outbreaks_othermetrics_only2months <- pperc_outbreaks_full_othermetrics[pperc_outbreaks_full_othermetrics$twomonthpd != "alltime",]

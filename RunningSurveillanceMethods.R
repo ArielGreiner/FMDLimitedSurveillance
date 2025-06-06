@@ -267,7 +267,7 @@ for(i in 1:length(p_perc)){
   pperc_outbreaks_avg$higher_alloutbreaks[pperc_outbreaks_avg$P_perc == p_perc[i]] <- range(pperc_outbreaks_full$Actual_peroutbreaks[pperc_outbreaks_full$P_perc == p_perc[i] & pperc_outbreaks_full$twomonthpd == "alltime"])[2]
 }
 
-#track which epiunits were searched for fig S6
+#track which epiunits were searched for fig S8
 riskfactor_degreeonly_tplus1epiunits <- list()
 
 #divide by the number of outbreaks observed
